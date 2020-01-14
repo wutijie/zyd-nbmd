@@ -1,0 +1,363 @@
+@charset "utf-8";
+/*!
+ * @名称：main.css
+ * @功能：1、重设浏览器默认样式
+ *      2、设置通用原子类
+ */
+/* 修正 IE 下 iframe 表现为行内块 */
+iframe {
+    display:block;
+}
+/* body默认字体 */
+body{
+    /*font-family:Microsoft YaHei,\5b8b\4f53,arial,sans-serif;*/
+}
+/* 修正表单元素不继承父级 font */
+button,input,select,textarea {
+    font-family:inherit;
+    font-size:inherit;
+    line-height:inherit;
+}
+/* 修正 th 不继承 text-align */
+th {
+    text-align:inherit;
+}
+/* 默认白底黑字 */
+html {
+    background:white;
+    color:black;
+}
+/* 去除内外边距 */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,select,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin:0;
+    padding:0;
+}
+/* 去除 table cell 的边距并让其边重合 */
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+/* 去除默认边框 */
+fieldset,img {
+    border:none;
+}
+/* 去除 firefox 下元素的边框 */
+abbr,acronym {
+    border:none;
+    font-variant:normal;
+}
+/* 去除标签居中 */
+caption,th {
+    text-align:left;
+}
+/* 统一标签文字样式 */
+h1,h2,h3,h4,h5,h6 {
+    font-size:100%;
+    font-weight:500;
+}
+q:before,q:after {
+    content:'';
+}
+del {
+    text-decoration:line-through;
+}
+address,caption,cite,code,dfn,em,th,var {
+    font-style:normal;
+    font-weight:500;
+}
+/* 统一上标和下标 */
+sub,sup {
+    font-size:75%;
+    line-height:0;
+    position:relative;
+    vertical-align:baseline;
+}
+sup {
+    top:-0.5em;
+}
+sub {
+    bottom:-0.25em;
+}
+/* 去除列表前的标识 */
+ol,ul {
+    list-style:none;
+}
+/* 去除默认状态下划线 */
+ins {
+    text-decoration:none;
+}
+/* 去除a默认样式 */
+a{
+    color:inherit;
+    text-decoration:none;
+    outline:none;
+}
+/* 去除button、input，select默认样式 */
+button,input,select,textarea{
+    box-sizing:content-box;
+    border-radius:0;
+    border:none;
+    outline:none;
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    background-color:transparent;
+}
+/* 根 */
+html,body{
+	width:100%;
+	height:100%;
+	font-size:20px;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+body{
+	position:relative;
+}
+/* 特殊定位 */
+.full{
+    box-sizing:border-box;
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+    height:100%;
+    width:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+}
+.full-screen{
+    box-sizing:border-box;
+	position:fixed;
+    z-index:999;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+    height:100%;
+    width:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+}
+.center{
+	position:absolute;
+	left:50%;
+	top:50%;
+	-webkit-transform:translate(-50%,-50%);
+	transform:translate(-50%,-50%);
+}
+.centerh{
+	position:absolute;
+	left:50%;
+	-webkit-transform:translateX(-50%);
+	transform:translateX(-50%);
+}
+.centerv{
+	position:absolute;
+	top:50%;
+	-webkit-transform:translateY(-50%);
+	transform:translateY(-50%);
+}
+/* flex布局 */
+.box{
+    display:-webkit-box; /* 老版本语法:Safari, iOS, Android browser, older WebKit browsers. */
+    display:-moz-box; /* 老版本语法:Firefox (buggy) */
+    display:-ms-flexbox; /* 混合版本语法:IE 10 */
+    display:-webkit-flex; /* 新版本语法:Chrome 21+ */
+    display:flex; /* 新版本语法:Opera 12.1, Firefox 22+ */
+    -webkit-box-pack:start;
+    -moz-justify-content:flex-start;
+    -webkit-justify-content:flex-start;
+    justify-content:flex-start;
+    -webkit-box-align:stretch;
+    -moz-align-items:stretch;
+    -webkit-align-items:stretch;
+    align-items:stretch;
+    -webkit-box-direction:normal;
+    -webkit-box-orient:horizontal;
+    -moz-flex-direction:row;
+    -webkit-flex-direction:row;
+    flex-direction:row;
+}
+.box>*{
+	-moz-flex-basis:0;
+	-webkit-flex-basis:0;
+	flex-basis:0;
+	width:0;
+	height:auto;
+}
+.orientvertical{
+    -webkit-box-direction:normal;
+	-webkit-box-orient:vertical;
+    -moz-flex-direction:column;
+    -webkit-flex-direction:column;
+    flex-direction:column;
+}
+.orientvertical>*{
+	-moz-flex-basis:0;
+	-webkit-flex-basis:0;
+	flex-basis:0;
+	width:auto;
+	height:0;
+}
+.item{
+	-webkit-box-flex:1.0;
+    -moz-flex-grow:1;
+    -webkit-flex-grow:1;
+    flex-grow:1;
+    -moz-flex-shrink:1;
+    -webkit-flex-shrink:1;
+    flex-shrink:1;
+}
+.flexnone{
+	height:auto;
+	width:auto;
+	-moz-flex-basis:auto;
+	-webkit-flex-basis:auto;
+	flex-basis:auto;
+	-webkit-box-flex:0.0;
+	-moz-flex-grow:0;
+    -webkit-flex-grow:0;
+    flex-grow:0;
+    -moz-flex-shrink:0;
+    -webkit-flex-shrink:0;
+    flex-shrink:0;
+}
+/* flex圣杯布局 */
+.flex-grail{
+	display:-webkit-box; /* 老版本语法:Safari, iOS, Android browser, older WebKit browsers. */
+    display:-moz-box; /* 老版本语法:Firefox (buggy) */
+    display:-ms-flexbox; /* 混合版本语法:IE 10 */
+    display:-webkit-flex; /* 新版本语法:Chrome 21+ */
+    display:flex; /* 新版本语法:Opera 12.1, Firefox 22+ */
+    -webkit-box-direction:normal;
+	-webkit-box-orient:vertical;
+    -moz-flex-direction:column;
+    -webkit-flex-direction:column;
+    flex-direction:column;
+}
+.flex-grail>.header,.flex-grail>.footer{
+	/*overflow:hidden;*/
+}
+.flex-grail>.main{
+	width:100%;
+	height:0;
+	-moz-flex-basis:0;
+	-webkit-flex-basis:0;
+	flex-basis:0;
+	-webkit-box-flex:1.0;
+	-moz-flex-grow:1;
+    -webkit-flex-grow:1;
+    flex-grow:1;
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+}
+/* 盒类型 */
+.bsbb{
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+.bscb{
+	box-sizing:content-box;
+	-webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+}
+/* 显示 */
+.db{
+    display:block;
+}
+.dib{
+	display:inline-block;
+}
+.dn{
+    display:none;
+}
+/* 内容水平对齐方式 */
+.tac{
+	text-align:center;
+}
+.tal{
+	text-align:left;
+}
+.tar{
+	text-align:right;
+}
+/* 浮动 */
+.fl {
+    float:left;
+}
+.fr {
+    float:right;
+}
+/* 包裹 */
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.oh{
+	overflow: hidden!important;
+}
+/* 定位 */
+.pa{
+	position:absolute;
+}
+.pr{
+	position:relative;
+}
+/* 超出部分省略号 */
+.ellipsis{
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+    -moz-flex-shrink: 1;
+    -webkit-flex-shrink: 1;
+    flex-shrink: 1;
+}
+/* 多行省略CSS并垂直居中（只兼容 -webkit-核心，垂直居中需要指定高度） */
+.in-two-line{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    word-break:break-all;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -webkit-box-pack:center;
+}
+
+.w100p{width: 100%;}
+.h100p{height: 100%;}
+
+/* 滚动条样式 */
+div::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background: transparent;
+}
+
+div::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 4px;
+}
+
+div:hover::-webkit-scrollbar-thumb {
+    background: hsla(0, 0%, 53%, 0.4);
+}
+
+div:hover::-webkit-scrollbar-track {
+    /* background: hsla(0, 0%, 53%, 0.1); */
+    background: transparent;
+}
+/* div {
+    scrollbar-base-color: #134087;
+    scrollbar-3dlight-color:#134087;
+    scrollbar-highlight-color: #134087;
+    scrollbar-track-color: #011433;
+    scrollbar-arrow-color: #011433;
+    scrollbar-shadow-color:#011433;
+} */

@@ -1,27 +1,85 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-const routes = [
+export const constRoutes = [
   {
-    path: '/',
-    name: 'home',
-    component: Home
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/login")
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: "/",
+    name: "First",
+    component: () => import('@/views/layout'),
+    redirect: "/home",
+    children: [
+      {
+        path: "/home",
+        name: "Home",
+        meta: {
+          parentName: 'First',
+          iframeSrc: '',
+          components: ['layout-home']
+        }
+      }
+    ]
+  }
+];
+
+export const superAdmin = [
+  {
+    path: '/superAdmin',
+    name: 'SuperAdmin',
+    component: () => import('@/views/layout'),
+    meta: {
+      title: '超级管理'
+    },
+    // redirect: "/superAdmin/persettings",
+    children: [
+      {
+        path: '/superAdmin/persettings',
+        name: 'Persettings',
+        meta: {
+          title: '权限管理',
+          parentName: 'SuperAdmin',
+          iframeSrc: '',
+          components: ['layout-superadmin-permissionsettings']
+        }
+      },
+      {
+        path: '/superAdmin/addFiles',
+        name: 'AddFiles',
+        meta: {
+          title: '添加文件',
+          parentName: 'SuperAdmin',
+          iframeSrc: '',
+          components: ['layout-superadmin-addfiles']
+        }
+      }
+    ]
   }
 ]
 
-const router = new VueRouter({
-  routes
-})
+export const notFound = [
+  {
+    path: '*',
+    name: 'NotFound',
+    component: () => import('@/views/notFound')
+  }
+]
 
-export default router
+const createRouter = () => new VueRouter({
+  mode: 'hash',
+  routes: constRoutes
+});
+
+const router = createRouter();
+
+export function resetRouter() {
+  const newRouter = createRouter();
+  router.matcher = newRouter.matcher; // reset router
+}
+
+export default router;
