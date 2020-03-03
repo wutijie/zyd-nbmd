@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '../store'
 
 // views
 const requireViews = require.context(
@@ -9,11 +10,23 @@ const requireViews = require.context(
     // 匹配基础组件文件名的正则表达式
     /\w+\.vue$/
 )
+let components = [];
 requireViews.keys().forEach(fileName => {
     // 获取组件配置
     const viewsConfig = requireViews(fileName);
-    const viewsName = fileName.replace(/\.\/|\/index\.vue/g, "").replace(/\//g, "-").toLowerCase();
-    // console.log(viewsName)
+    // console.log(fileName)
+    if(fileName.split('/')[2] != 'index.vue'){
+        fileName = fileName.replace('./layout/', '');
+    }
+    // console.log(fileName)
+    const viewsName = fileName.replace(/\.\/|\/index\.vue/g, '').replace(/\//g, '-').toLowerCase();
+    // console.log(viewsName, '*****************')
+    // console.log(viewsName.indexOf('.vue'), viewsName.indexOf('.vue') != '-1', '*****************')
+    // console.log('---------------------------------------')
+    if(viewsName.indexOf('.vue') != '-1'){
+        return;
+    }
+    components.push(viewsName);
     // 全局注册组件
     Vue.component(
         viewsName,
@@ -35,8 +48,9 @@ const requireComponents = require.context(
 requireComponents.keys().forEach(fileName => {
     // 获取组件配置
     const componentsConfig = requireComponents(fileName);
-    const componentsName = fileName.replace(/\.\/|\.vue/g,"").toLowerCase();
+    const componentsName = fileName.replace(/\.\/|\.vue/g, '').toLowerCase();
     // console.log(componentsName)
+    components.push(componentsName);
     // 全局注册组件
     Vue.component(
         componentsName,
@@ -46,3 +60,4 @@ requireComponents.keys().forEach(fileName => {
         componentsConfig.default || componentsConfig
     )
 })
+store.commit('admin/SET_ALLCOMPONENTS', components);

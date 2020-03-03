@@ -21,10 +21,15 @@ export const constRoutes = [
         meta: {
           parentName: 'First',
           iframeSrc: '',
-          components: ['layout-home']
+          components: ['home']
         }
       }
     ]
+  },
+  {
+    path: '/addFiles',
+    name: 'AddFiles',
+    component: () => import('@/views/layout/superAdmin/addFiles'),
   }
 ];
 
@@ -34,20 +39,11 @@ export const superAdmin = [
     name: 'SuperAdmin',
     component: () => import('@/views/layout'),
     meta: {
-      title: '超级管理'
+      title: '超级管理',
+      iconClass: 'icon-superadmin',
     },
     // redirect: "/superAdmin/persettings",
     children: [
-      {
-        path: '/superAdmin/persettings',
-        name: 'Persettings',
-        meta: {
-          title: '权限管理',
-          parentName: 'SuperAdmin',
-          iframeSrc: '',
-          components: ['layout-superadmin-permissionsettings']
-        }
-      },
       {
         path: '/superAdmin/addFiles',
         name: 'AddFiles',
@@ -55,9 +51,19 @@ export const superAdmin = [
           title: '添加文件',
           parentName: 'SuperAdmin',
           iframeSrc: '',
-          components: ['layout-superadmin-addfiles']
+          components: ['superadmin-addfiles']
         }
-      }
+      },
+      // {
+      //   path: '/superAdmin/createPage',
+      //   name: 'CreatePage',
+      //   meta: {
+      //     title: '创建网页',
+      //     parentName: 'SuperAdmin',
+      //     iframeSrc: '',
+      //     components: ['superadmin-createpage']
+      //   }
+      // }
     ]
   }
 ]

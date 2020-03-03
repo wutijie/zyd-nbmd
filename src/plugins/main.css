@@ -336,7 +336,7 @@ body{
 /* 滚动条样式 */
 div::-webkit-scrollbar {
     width: 6px;
-    height: 6px;
+    height: 10px;
     background: transparent;
 }
 
@@ -361,3 +361,8 @@ div:hover::-webkit-scrollbar-track {
     scrollbar-arrow-color: #011433;
     scrollbar-shadow-color:#011433;
 } */
+
+.iconfont {
+    font-size: 20px;
+    margin-right: 10px;
+}

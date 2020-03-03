@@ -1,7 +1,7 @@
 import router, { notFound } from './router'
 import store from './store'
-import { getToken } from "@/utils/auth.js";
-
+import { getToken } from "@/utils/auth.js"
+import { Message } from 'element-ui'
 
 router.num = 0;
 // 定义白名单
@@ -14,7 +14,7 @@ router.beforeEach(async (to, from, next) => {
     }
 
     const w_token = getToken();
-
+    // console.log('w_token:' + w_token)
     if(w_token){
         // token存在
         if(to.path === '/login'){
@@ -23,11 +23,17 @@ router.beforeEach(async (to, from, next) => {
             try {
                 next();
                 const w_routes = await store.dispatch('user/getInfo');
-                router.addRoutes(w_routes);
+                if(w_routes && w_routes.length > 0){
+                    router.addRoutes(w_routes);
+                }else{
+                    Message.error('暂无权限');
+                    next('/login');
+                }
                 // next();
                 // next({ replace: true });
                 // next({ ...to, replace: true });
             } catch (error) {
+                Message.error('登录失败');
                 next('/login');
             }
         }
@@ -36,7 +42,8 @@ router.beforeEach(async (to, from, next) => {
         if(whiteList.indexOf(to.path) !== -1){
             next();
         }else{
-            next('login');
+            // Message.error('登录失败');
+            next('/login');
         }
     }
 
